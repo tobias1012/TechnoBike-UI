@@ -1,0 +1,39 @@
+{
+  "name": "TechnoBike-UI",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.3.5",
+    "@emotion/react": "11",
+    "@emotion/styled": "11",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@tauri-apps/api": "^1.1.0",
+    "chart.js": "^3.9.1",
+    "framer-motion": "6",
+    "gpxparser": "^3.0.8",
+    "haversine-distance": "^1.2.1",
+    "leaflet": "^1.9.2",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^4.3.1",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.38.0",
+    "react-icons": "^4.6.0",
+    "react-leaflet": "^4.1.0",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.1.0",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "vite": "^3.0.2"
+  }
+}
