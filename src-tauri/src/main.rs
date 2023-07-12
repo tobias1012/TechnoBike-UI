@@ -81,9 +81,9 @@ fn set_bike_rider(reader: State<Reader>, id: &str, name: &str, age: u8, weight: 
 fn main() {
     let mut reciever = techno_bike::start_listener();
     let reader = reciever.reader.clone();
-    let writer = reciever.writer.copy(); //This cannot be done without a Mutex
+    //let writer = reciever.writer.copy(); //This cannot be done without a Mutex
 
-    Writer(writer);
+    //Writer(writer);
 
     println!("Message from Rust: {}", "TEST");
     thread::spawn(move || {reciever.receiver_loop()});

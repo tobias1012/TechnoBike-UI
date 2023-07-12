@@ -15,7 +15,15 @@
           cargo-tauri
           yarn
           rust-analyzer
-
+          openssl
+          libsoup
+          gdk-pixbuf
+          pkgconfig
+          glib
+          cairo
+          pango
+          webkitgtk
+          glib-networking
         ];
       };
     });
