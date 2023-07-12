@@ -23,6 +23,10 @@ function App() {
     setBikes(await invoke("get_bikes"));
   }
 
+  async function set_rider(id, name, age, weight) {
+    invoke("set_bike_rider", {id: id, name: name, age: age, weight: weight})
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
       getNumBikes();

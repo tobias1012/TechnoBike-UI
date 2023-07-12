@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
         },
         {
             path: "racing/game",
-            element: <RacingGame file="alpe.gpx"/>
+            element: <RacingGame file="schiehallion.gpx"/>
         }
       ],
     },

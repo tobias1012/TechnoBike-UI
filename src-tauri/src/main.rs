@@ -4,13 +4,16 @@
 )]
 
 use techno_bike::{self, bike::Bike};
-use evmap::ReadHandle;
+use evmap::{ReadHandle, WriteHandle};
 use std::{thread, sync::MutexGuard};
 use tauri::State;
 use std::sync::Mutex;
 
 //Reader struct
 struct Reader(Mutex<ReadHandle<String, Bike>>);
+
+//Writer struct
+struct Writer(Mutex<WriteHandle<String, Bike>>);
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -38,6 +41,11 @@ fn get_bikes(reader: State<Reader>) -> String {
             //This is gross, preparing for serde
             json.push_str(bike.watt.to_string().as_str());
         }
+        json.push_str("\", \n \"weight:\"");
+        for bike in bikes_read{
+            //This is gross, preparing for serde
+            json.push_str(bike.weight.to_string().as_str());
+        }
 
 
         json.push_str("\" }");
@@ -54,9 +62,29 @@ fn get_bikes(reader: State<Reader>) -> String {
     ret
 }
 
+/*#[tauri::command]
+fn set_bike_rider(reader: State<Reader>, id: &str, name: &str, age: u8, weight: u16) -> bool {
+    let state_guard: MutexGuard<ReadHandle<String, Bike>> = reader.0.lock().unwrap();
+    if state_guard.len() == 0 {
+        return false
+    }
+    if let bikes = &state_guard.get(&String::from(id)).unwrap() {
+        for bike in bikes {
+            //bike.set_rider(String::from(name), age, weight);
+            return true
+        }
+    }
+    return false
+    
+}
+*/
 fn main() {
     let mut reciever = techno_bike::start_listener();
     let reader = reciever.reader.clone();
+    let writer = reciever.writer.copy(); //This cannot be done without a Mutex
+
+    Writer(writer);
+
     println!("Message from Rust: {}", "TEST");
     thread::spawn(move || {reciever.receiver_loop()});
 

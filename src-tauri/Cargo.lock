@@ -2863,7 +2863,7 @@ dependencies = [
 
 [[package]]
 name = "techno_bike"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "evmap",
  "evmap-derive",
