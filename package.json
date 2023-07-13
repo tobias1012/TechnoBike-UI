@@ -1,39 +1,33 @@
 {
-  "name": "TechnoBike-UI",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "tauri": "tauri"
-  },
-  "dependencies": {
-    "@chakra-ui/react": "^2.3.5",
-    "@emotion/react": "11",
-    "@emotion/styled": "11",
-    "@reduxjs/toolkit": "^1.8.6",
-    "@tauri-apps/api": "^1.1.0",
-    "chart.js": "^3.9.1",
-    "framer-motion": "6",
-    "gpxparser": "^3.0.8",
-    "haversine-distance": "^1.2.1",
-    "leaflet": "^1.9.2",
-    "react": "^18.2.0",
-    "react-chartjs-2": "^4.3.1",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.38.0",
-    "react-icons": "^4.6.0",
-    "react-leaflet": "^4.1.0",
-    "react-redux": "^8.0.4",
-    "react-router-dom": "^6.4.2"
-  },
-  "devDependencies": {
-    "@tauri-apps/cli": "^1.1.0",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.0.0",
-    "vite": "^3.0.2"
-  }
+	"name": "technobike-ui",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^1.0.0-next.50",
+		"@sveltejs/kit": "^1.20.4",
+		"@tauri-apps/cli": "^1.4.0",
+		"@typescript-eslint/eslint-plugin": "^5.45.0",
+		"@typescript-eslint/parser": "^5.45.0",
+		"eslint": "^8.28.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-svelte": "^2.30.0",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.10.1",
+		"svelte": "^4.0.5",
+		"svelte-check": "^3.4.3",
+		"tslib": "^2.4.1",
+		"typescript": "^5.0.0",
+		"vite": "^4.4.2"
+	},
+	"type": "module"
 }
