@@ -25,6 +25,9 @@
           webkitgtk
           glib-networking
         ];
+	shellHook = ''
+	  yarn install
+	'';
       };
     });
 }
