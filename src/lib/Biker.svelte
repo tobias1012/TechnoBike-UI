@@ -1,4 +1,4 @@
-<div class = "bike">            transform: translatex(5%);
+<div class = "bike">
 
     <p>Name</p>
     <div class = "bike-sprite">
