@@ -27,6 +27,7 @@
         ];
 	shellHook = ''
 	  yarn install
+    alias dev="GDK_BACKEND=x11 yarn tauri dev"
 	'';
       };
     });
