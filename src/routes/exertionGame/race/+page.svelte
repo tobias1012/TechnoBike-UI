@@ -1,8 +1,15 @@
 <script lang="ts">
-	import { invoke } from "@tauri-apps/api/tauri";
+import BikeCardLong from "$lib/games/bikeCardLong.svelte";
+import { invoke } from "@tauri-apps/api/tauri";
 
-    let bikes: String;
-    let bikesArr: Array<String>;
+
+    interface bikedata {
+        name: string;
+        watt: string;
+        weight: string;
+    }
+    let bikes: string;
+    let bikesArr: Array<bikedata> = [];
 
     let gameData = {
         bikes: [
@@ -17,9 +24,13 @@
     };
 
     async function getBikes() {
-        bikes = await invoke("get_bikes");
-        bikesArr = bikes.split("},");
-        console.log(bikesArr);
+        let newBikes = await invoke("get_bikes");
+
+        if (newBikes !== bikes) {
+            bikes = newBikes;
+            bikesArr = JSON.parse(bikes);
+            console.log(bikesArr.length);
+        }
     }
 
 
@@ -31,6 +42,12 @@
 <div>
     <h1>CYKELRÆS!!</h1>
     <div class="bikedata">
-            {bikes}
+        {#key bikes}
+            
+        
+            {#each bikesArr as bike}
+                <BikeCardLong name={bike.name} watt={bike.watt} maxWatt=300/>
+            {/each}
+        {/key}
     </div>
 </div>

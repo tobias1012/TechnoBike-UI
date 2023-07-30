@@ -1,6 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use serde::Serialize;
 use techno_bike::{self, bike::Bike};
 use evmap::{ReadHandle, WriteHandle};
 use std::{thread, sync::MutexGuard};
@@ -23,6 +24,13 @@ fn get_num_bikes(reader: State<Reader>) -> String {
     bikes.to_string()
 }
 
+#[derive(Serialize)]
+struct BikeData {
+    name: String,
+    watt: String,
+    weight: String
+}
+
 #[tauri::command]
 fn get_bikes(reader: State<Reader>) -> String {
     let state_guard: MutexGuard<ReadHandle<String, Bike>> = reader.0.lock().unwrap();
@@ -31,32 +39,21 @@ fn get_bikes(reader: State<Reader>) -> String {
     if state_guard.len() == 0 {
         return String::from("");
     }
+    let mut dataBikes: Vec<BikeData> = vec![];
+
     for (name, bikes_read) in &state_guard.read().unwrap() {
-        let mut json = String::from("{ \"name\": \"");
-        json.push_str(name);
-        json.push_str("\",\n \"watt\": \"");
-        for bike in bikes_read{
-            //This is gross, preparing for serde
-            json.push_str(bike.watt.to_string().as_str());
+        for cbike in bikes_read{
+            dataBikes.push(
+                BikeData{
+                    name:name.clone(),
+                    watt:cbike.watt.to_string(),
+                    weight:cbike.weight.to_string()
+                }
+            )
         }
-        json.push_str("\", \n \"weight:\"");
-        for bike in bikes_read{
-            //This is gross, preparing for serde
-            json.push_str(bike.weight.to_string().as_str());
-        }
-
-
-        json.push_str("\" }");
-        bikes.push(json);
-    }   
-    let mut ret = String::from("[");
-    for bike in bikes {
-        ret.push_str(&bike);
-        ret.push_str(",\n");
-        
     }
 
-    ret.push_str("]");
+    let ret = serde_json::to_string(&dataBikes).unwrap();
     ret
 }
 
